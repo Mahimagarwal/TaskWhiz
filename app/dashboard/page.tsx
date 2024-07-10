@@ -1,8 +1,13 @@
+import SearchSection from "./_components/SearchSection"
+import TemplateListSection from "./_components/TemplateListSection"
 
 
 const page = () => {
   return (
-    <div>Dashboard</div>
+    <div>
+        <SearchSection/>
+        <TemplateListSection/>
+    </div>
   )
 }
 
