@@ -14,7 +14,7 @@ interface PROPS{
 }
 
 const page = (props:PROPS) => {
-    const selectedTemplate:TEMPLATE|undefined=Templates?.find((item)=>item.slug)
+    const selectedTemplate:TEMPLATE|undefined=Templates?.find((item)=>item.slug==props.params['template-slug'])
     const GenerateAIContent=(formData:any)=>{
        
     }
