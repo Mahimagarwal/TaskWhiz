@@ -7,6 +7,7 @@ import { eq } from 'drizzle-orm';
 import React, { useContext, useEffect, useState } from 'react'
 import { HISTORY } from './history/page';
 import { TotalUsageContext } from '@/app/(context)/TotalUsageContex';
+import { UpdateCreditUsageContext } from '../(context)/UpdateCredits';
 
   function UsageTrack() {
 
@@ -15,12 +16,14 @@ import { TotalUsageContext } from '@/app/(context)/TotalUsageContex';
 
     
     const [maxWords,setMaxWords]=useState(10000000)
-   
+    const {updateCreditUsage,setUpdateCreditUsage}=useContext(UpdateCreditUsageContext);
     useEffect(()=>{
         user&&GetData();
     },[user]);
 
-
+  useEffect(()=>{
+    user&&GetData();
+  },[updateCreditUsage&&user]);
 
     const GetData=async()=>{
          {/* @ts-ignore */}
