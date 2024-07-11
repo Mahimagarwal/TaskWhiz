@@ -25,11 +25,7 @@ function SideNav() {
             icon:WalletCards,
             path:'/dashboard/billing'
         },
-        {
-            name:'Setting',
-            icon:Settings,
-            path:'/dashboard/settings'
-        },
+
 
     ]
 
