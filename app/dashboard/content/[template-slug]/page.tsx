@@ -29,12 +29,12 @@ const page = (props:PROPS) => {
     const [aiOutput,setAiOutput]=useState<string>('');
     const {totalUsage,setTotalUsage}=useContext(TotalUsageContext);
     const GenerateAIContent= async(formData:any)=>{
-        if(totalUsage>=10000)
-        {
-            console.log("Please Upgrade")
-            router.push('/dashboard/billing')
-            return;
-        }
+        // if(totalUsage>=10000)
+        // {
+        //     console.log("Please Upgrade")
+        //     router.push('/dashboard/billing')
+        //     return;
+        // }
         setLoading(true);
         const SelectedPrompt=selectedTemplate?.aiPrompt;
         const FinalAIPrompt=JSON.stringify(formData)+", "+SelectedPrompt;

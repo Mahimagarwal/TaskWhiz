@@ -40,8 +40,8 @@ function SideNav() {
 
   return (
     <div className='h-screen relative p-5 shadow-sm border bg-white'>
-        <div className='flex justify-center'>
-        <Image src={'/logo.svg'} alt='logo' width={120} height={100} />
+        <div className='flex  flex-col justify-center items-center'>
+        <Image src={'/logo.svg'} alt='logo' width={50} height={30} /> TaskWhiz
         </div>
         <hr className='my-6 border' />
         <div className='mt-3'>
