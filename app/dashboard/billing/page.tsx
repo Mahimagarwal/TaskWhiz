@@ -4,15 +4,15 @@ import React, { useContext, useState } from 'react'
 import axio from 'axios'
 import { Loader2Icon } from 'lucide-react';
 import { db } from '@/utils/db';
-import { UserSubscription } from '@/utils/schema';
+// import { UserSubscription } from '@/utils/schema';
 import { useUser } from '@clerk/nextjs';
 import moment from 'moment';
-import { UserSubscriptionContext } from '@/app/(context)/UserSubscriptionContext';
+// import { UserSubscriptionContext } from '@/app/(context)/UserSubscriptionContext';
 function billing() {
 
   const [loading,setLoading]=useState(false);
   const {user}=useUser();
-    const {userSubscription,setUserSubscription}=useContext(UserSubscriptionContext);
+    // const {userSubscription,setUserSubscription}=useContext(UserSubscriptionContext);
     
   const CreateSubscription=()=>{
     setLoading(true)
@@ -47,20 +47,20 @@ function billing() {
       alert("Razropay failed to load!!");
       return;
   }
-    const options={
-      "key":process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-      "subscription_id":subId,
-      "name":'Tubeguruji AI Apps',
-      description:'Monthly Subscription',
-      handler:async(resp:any)=>{
-        console.log(resp);
-        if(resp)
-          {
-            SaveSubcription(resp?.razorpay_payment_id)
-          }
-        setLoading(false);
-      }
-    }
+    // const options={
+    //   "key":process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+    //   "subscription_id":subId,
+    //   "name":'Tubeguruji AI Apps',
+    //   description:'Monthly Subscription',
+    //   handler:async(resp:any)=>{
+    //     console.log(resp);
+    //     if(resp)
+    //       {
+    //         SaveSubcription(resp?.razorpay_payment_id)
+    //       }
+    //     setLoading(false);
+    //   }
+    // }
  
     try{
     // @ts-ignore 
@@ -74,21 +74,21 @@ function billing() {
     }
   }
 
-  const SaveSubcription=async(paymentId:string)=>{
-    const result=await db.insert(UserSubscription)
-    .values({
-      email:user?.primaryEmailAddress?.emailAddress,
-      userName:user?.fullName,
-      active:true,
-      paymentId:paymentId,
-      joinDate:moment().format('DD/MM/yyyy')
-    });
-    console.log(result);
-    if(result)
-      {
-        window.location.reload();
-      }
-  }
+//   const SaveSubcription=async(paymentId:string)=>{
+//     const result=await db.insert(UserSubscription)
+//     .values({
+//       email:user?.primaryEmailAddress?.emailAddress,
+//       userName:user?.fullName,
+//       active:true,
+//       paymentId:paymentId,
+//       joinDate:moment().format('DD/MM/yyyy')
+//     });
+//     console.log(result);
+//     if(result)
+//       {
+//         window.location.reload();
+//       }
+//   }
 
   return (
     <div>
@@ -174,15 +174,6 @@ function billing() {
         </li>
       </ul>
 
-      {/* <a
-        href="#"
-        className="mt-8 block rounded-full 
-        border border-indigo-600 
-        px-12 py-3 text-center text-sm font-medium bg-gray-500 text-white
-          hover:ring-1 hover:ring-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-      >
-        Currently Active Plan
-      </a> */}
     </div>
     <div className="rounded-2xl bg-white border border-gray-200 p-6 shadow-sm sm:px-8 lg:p-12">
       <div className="text-center">
@@ -267,7 +258,7 @@ function billing() {
         variant='outline'
       >
         {loading&&<Loader2Icon className='animate-spin'/>}
-        {userSubscription?'Active Plan':  'Get Started'}
+        {/* {userSubscription?'Active Plan':  'Get Started'} */}
       </Button>
     </div>
   </div>

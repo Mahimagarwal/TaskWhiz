@@ -1,6 +1,6 @@
-
+// "use client"
 import Templates from '@/app/(data)/Templates'
-import { Button } from '@/components/ui/button'
+
 import { db } from '@/utils/db'
 import { AIOutput } from '@/utils/schema'
 import { currentUser } from '@clerk/nextjs/server'
