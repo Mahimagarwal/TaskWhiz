@@ -5,12 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import {  Loader2Icon } from "lucide-react";
 
 interface PROPS{
     selectedTemplate?:TEMPLATE;
-    userFormInput:any
+    userFormInput:any,
+    loading:boolean
 }
-const FormSection = ({selectedTemplate,userFormInput}:PROPS) => {
+const FormSection = ({selectedTemplate,userFormInput,loading}:PROPS) => {
     
     const [formData,setFormData]=useState<any>();
     const handelInputChange=(e:any)=>{
@@ -48,8 +50,8 @@ const FormSection = ({selectedTemplate,userFormInput}:PROPS) => {
             }
             </div>
          ))  }
-         <Button type="submit" className="w-full py-6">
-              Generate Content
+         <Button type="submit" className="w-full py-6" disabled={loading}>
+             {loading&&<Loader2Icon className="animate-spin"/>} Generate Content
          </Button>
        </form>
     </div>

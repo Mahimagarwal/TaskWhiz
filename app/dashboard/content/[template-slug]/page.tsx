@@ -6,6 +6,8 @@ import { TEMPLATE } from "../../_components/TemplateListSection"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
+import { chatSession } from "@/utils/AiModel"
+import { useState } from "react"
 
 interface PROPS{
     params:{
@@ -15,7 +17,15 @@ interface PROPS{
 
 const page = (props:PROPS) => {
     const selectedTemplate:TEMPLATE|undefined=Templates?.find((item)=>item.slug==props.params['template-slug'])
-    const GenerateAIContent=(formData:any)=>{
+    const [loading,setLoading]=useState(false);
+    const [aiOutput,setAiOutput]=useState<string>('');
+    const GenerateAIContent= async(formData:any)=>{
+        setLoading(true);
+        const SelectedPrompt=selectedTemplate?.aiPrompt;
+        const FinalAIPrompt=JSON.stringify(formData)+", "+SelectedPrompt;
+        const result= await chatSession.sendMessage(FinalAIPrompt);
+        setAiOutput(result?.response.text());
+        setLoading(false);
        
     }
     return (
@@ -28,11 +38,11 @@ const page = (props:PROPS) => {
                     <FormSection 
                     selectedTemplate={selectedTemplate}
                     userFormInput={(v:any)=>GenerateAIContent(v)}
-                    // loading={loading} 
+                    loading={loading} 
                     />
                 {/* OutputSection  */}
                 <div className='col-span-2'>
-                    <OutputSection  />
+                    <OutputSection aiOutput={aiOutput}/>
                     </div>
             </div>
         </div>
