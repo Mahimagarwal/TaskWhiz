@@ -7,11 +7,13 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
 import { chatSession } from "@/utils/AiModel"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { db } from "@/utils/db"
 import { AIOutput } from "@/utils/schema"
 import { useUser } from "@clerk/nextjs"
 import moment from 'moment'
+import { TotalUsageContext } from "@/app/(context)/TotalUsageContex"
+import { useRouter } from "next/navigation"
 
 interface PROPS{
     params:{
@@ -23,8 +25,16 @@ const page = (props:PROPS) => {
     const selectedTemplate:TEMPLATE|undefined=Templates?.find((item)=>item.slug==props.params['template-slug'])
     const [loading,setLoading]=useState(false);
     const {user}=useUser();
+    const router=useRouter();
     const [aiOutput,setAiOutput]=useState<string>('');
+    const {totalUsage,setTotalUsage}=useContext(TotalUsageContext);
     const GenerateAIContent= async(formData:any)=>{
+        if(totalUsage>=10000)
+        {
+            console.log("Please Upgrade")
+            router.push('/dashboard/billing')
+            return;
+        }
         setLoading(true);
         const SelectedPrompt=selectedTemplate?.aiPrompt;
         const FinalAIPrompt=JSON.stringify(formData)+", "+SelectedPrompt;
@@ -35,6 +45,7 @@ const page = (props:PROPS) => {
 
     }
     const SaveInDb=async(formData:any,slug:any,aiResp:string)=>{
+        
         const result= await db.insert(AIOutput).values({
             formData:formData,
             templateSlug:slug,

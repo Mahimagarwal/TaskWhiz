@@ -1,10 +1,15 @@
+"use client"
+import { useState } from "react";
+import { TotalUsageContext } from "../(context)/TotalUsageContex";
 import Header from "./_components/Header";
 import SideNav from "./_components/SideNav";
 
 const layout = ({children}: Readonly<{
     children: React.ReactNode;
   }>) => {
+    const[totalUsage,setTotalUsage]=useState<Number>(0);
   return (
+    <TotalUsageContext.Provider value={{totalUsage,setTotalUsage}}>
     <div className="bg-slate-200 h-screen">
     <div className="md:w-64 hidden md:block fixed">
           <SideNav/>
@@ -14,6 +19,7 @@ const layout = ({children}: Readonly<{
         {children}
     </div>
     </div>
+    </TotalUsageContext.Provider>
   )
 }
 
