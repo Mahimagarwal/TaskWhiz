@@ -43,7 +43,7 @@ function SideNav() {
         <div className='mt-3'>
             {MenuList.map((menu,index)=>(
                 <Link href={menu.path}>
-                    <div className={`flex gap-2 mb-2 p-3
+                    <div className={`flex gap-2 mb-2 p-3 p-3
                     hover:bg-primary hover:text-white rounded-lg
                     cursor-pointer items-center
                     ${path==menu.path&&'bg-primary text-white'}
@@ -54,7 +54,7 @@ function SideNav() {
                 </Link>
             ))}
         </div>
-        <div className='absolute bottom-10 left-0 w-full'>
+        <div className='absolute bottom-10 left-0 w-full absolute'>
             <UsageTrack/>
         </div>
     </div>
